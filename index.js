@@ -48,10 +48,11 @@ app.post("/webhook", middleware(config), async (req, res) => {
 
       const replyMessage = chatCompletion.choices[0].message.content;
 
-      return lineClient.replyMessage(event.replyToken, {
-        type: "text",
-        text: replyMessage,
-      });
+      return lineClient.pushMessage(event.source.userId, {
+  type: "text",
+  text: replyMessage,
+});
+
     })
   );
 
